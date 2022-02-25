@@ -10,6 +10,7 @@ namespace BulkyDonetCore30.Controllers
 {
     public class CategoryController : Controller
     {
+        // private
         private readonly ApplicationDBContext mDb;
         public CategoryController(ApplicationDBContext db)
         {
