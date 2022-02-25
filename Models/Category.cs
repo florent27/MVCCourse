@@ -9,7 +9,7 @@ namespace BulkyDonetCore30.Models
     public class Category
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
 

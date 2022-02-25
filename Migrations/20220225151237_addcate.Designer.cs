@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyDonetCore30.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20220225105946_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20220225151237_addcate")]
+    partial class addcate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,10 @@ namespace BulkyDonetCore30.Migrations
 
             modelBuilder.Entity("BulkyDonetCore30.Models.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");

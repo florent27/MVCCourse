@@ -1,4 +1,5 @@
 ﻿@using BulkyDonetCore30.Models
+@using BulkyDonetCore30.CategoryDTO
 @model IEnumerable<Category>
 @{
     ViewData["Title"] = "Index";
@@ -6,10 +7,10 @@
 
 <div class="container p-3">
     <div class="row p-4">
-        <div class="col-6">
+        <div class="col-5">
             <h2 class="text-primary">Category List</h2>
         </div>
-        <div class="col-6">
+        <div class="col-6 text-end">
             <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
                 Create New Category
             </a>
@@ -39,6 +40,7 @@
                         @item.DisplayOrder
                     </td>
                 </tr>
+
             }
         </tbody>
     </table>

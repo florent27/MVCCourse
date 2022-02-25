@@ -27,7 +27,35 @@ namespace BulkyDonetCore30.Controllers
             {
                 lCategoryDTO.Add(new CategoryDTO.CategoryDTO(item.Name, item.DisplayOrder));
             }
-            return View(lCategoryDTO);
+            lCategoryDTO.Clear();
+            lCategoryDTO = lCategoryList.Select(c => new CategoryDTO.CategoryDTO(c.Name, c.DisplayOrder)).ToList();
+
+            return View(lCategoryList);
+        }
+
+        // Get
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category obj)
+        {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "Cannot Match Name");
+            }
+            if (ModelState.IsValid)
+            {
+                mDb.Categories.Add(obj);
+                // Post to db
+                mDb.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
     }
 }
