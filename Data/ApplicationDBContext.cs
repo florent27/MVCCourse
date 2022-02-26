@@ -11,7 +11,10 @@ namespace BulkyDonetCore30.Data
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
+        }
 
+        public ApplicationDBContext() : this(null)
+        {
         }
 
         public DbSet<Category> Categories { get; set; }

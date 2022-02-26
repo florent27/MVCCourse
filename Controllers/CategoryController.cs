@@ -53,6 +53,7 @@ namespace BulkyDonetCore30.Controllers
                 mDb.Categories.Add(obj);
                 // Post to db
                 mDb.SaveChanges();
+                TempData["success"] = "Category Added successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -85,12 +86,46 @@ namespace BulkyDonetCore30.Controllers
             }
             if (ModelState.IsValid)
             {
-                mDb.Categories.Add(obj);
+                mDb.Categories.Update(obj);
                 // Post to db
                 mDb.SaveChanges();
+                TempData["success"] = "Category Modified successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+
+        // Get
+        public IActionResult Remove(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var lCategory = mDb.Categories.Find(id);
+            //var lCategorye = mDb.Categories.FirstOrDefault(i => i.Id == id);
+            if (lCategory == null)
+            {
+                return NotFound();
+            }
+            return View(lCategory);
+        }
+
+        // Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Remove(Category obj)
+        {
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            mDb.Categories.Remove(obj);
+            // Post to db
+            mDb.SaveChanges();
+             TempData["success"] = "Category REmoved successfully";
+            return RedirectToAction("Index");
         }
     }
 }
